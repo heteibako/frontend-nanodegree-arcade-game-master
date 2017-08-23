@@ -1,7 +1,6 @@
+'use strict';
 
 var score = 0;
-document.getElementById('score').innerHTML = score;
-
 // Enemies our player must avoid
 var Enemy = function(x, y) {
     // Variables applied to each of our instances go here,
@@ -12,6 +11,7 @@ var Enemy = function(x, y) {
     this.sprite = 'images/enemy-bug.png';
     this.x = x;
     this.y = y;
+    this.speed = Math.floor((Math.random()*200)+100);
 };
 
 // Update the enemy's position, required method for game
@@ -21,7 +21,7 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
     if (this.x < 505) {
-        this.x += (150 * dt);
+        this.x = this.x + this.speed * dt;
     }
     else {this.x = -90;}
 
@@ -48,17 +48,20 @@ var Player = function () {
     this.sprite = 'images/char-boy.png';
     this.x = 200;
     this.y = 320;
+
+
 };
 
 // Is called every time the player position is updated
 Player.prototype.update = function() {
 
-	// If the player reaches the water
-	if (player.y < 20) {
-	score++;
-	document.getElementById('score').innerHTML = score;
-	this.reset();
+  // If the player reaches the water
+	if (this.y < 20) {
+    document.getElementById('score').innerHTML = score;
+    score++;
+this.reset();
 }
+
 };
 
 Player.prototype.render = function() {
@@ -67,36 +70,35 @@ Player.prototype.render = function() {
 
 Player.prototype.handleInput = function(direction) {
     if(direction == 'left' && this.x > 0) {
-        this.x -= 50;
+        this.x -= 100;
     }
     if(direction == 'right' && this.x < 400) {
-        this.x += 50;
+        this.x += 100;
     }
     if(direction == 'up' && this.y > 3) {
-        this.y -= 50;
+        this.y -= 100;
     }
     if(direction == 'down' && this.y < 400) {
-        this.y += 50;
+        this.y += 100;
     }
 };
 
 // Is called when the player is reset to the starting point
 Player.prototype.reset = function() {
     this.x = 200;
-    this.y = 320;
+    this.y = 300;
 };
 
 // Now instantiate your objects.
-var enemy1 = new Enemy(0, 60);
+var enemy1 = new Enemy(0, 50);
 var enemy2 = new Enemy(-220, 140);
 var enemy3 = new Enemy(-500, 230);
-var enemy4 = new Enemy(-1270, 140);
-var enemy5 = new Enemy(-1800, 60);
-var enemy6 = new Enemy(-1100, 230);
+
+
 
 
 // Place all enemy objects in an array called allEnemies
-var allEnemies = [enemy1, enemy2, enemy3, enemy4, enemy5, enemy6];
+var allEnemies = [enemy1, enemy2, enemy3];
 // Place the player object in a variable called player
 var player = new Player();
 
