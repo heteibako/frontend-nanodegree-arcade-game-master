@@ -9,4 +9,6 @@ The goal is to create a classic arcage frogger game using the newly acquired ski
 
 ##How to Play:
 
-Use the arrow keys to move the player across the board. To win you need to reach water, but avoid colliding with the bugs.
+1 - Double click on the 'Index.html' file.
+2 - It opens in the default browser
+3 - Use the arrow keys to move the player across the board. To win you need to reach water, but avoid colliding with the bugs.
